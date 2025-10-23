@@ -14,8 +14,8 @@
     "migrate:down": "yarn kysely migrate:down --verbose",
     "seed": "yarn kysely seed:run --verbose",
     "seed:create": "yarn kysely seed:make",
-    "rollback": "yarn kysely --migrate:rollback --verbose",
-    "db:prune": "yarn kysely migrate:rollback --all && yarn kysely --migrate:latest --verbose"
+    "rollback": "yarn kysely migrate:rollback --all",
+    "db:prune": "yarn kysely migrate:rollback --all && yarn kysely migrate:latest --verbose"
   },
   "license": "MIT",
   "dependencies": {
