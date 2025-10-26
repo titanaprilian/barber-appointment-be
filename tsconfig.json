@@ -1,6 +1,6 @@
 {
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "test/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "lib": ["es2020"],
     "target": "es2024",
@@ -22,7 +22,8 @@
       "@database/*": ["database/*"],
       "@config/*": ["config/*"],
       "@queue/*": ["queue/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@tests/*": ["tests/*"]
     }
   }
 }
