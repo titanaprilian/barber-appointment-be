@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { errorResponse, successResponse } from '@utils/response.js';
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import rootRoutes from '@app/base/routes.js';
+import authRoutes from '@app/auth/routes.js';
 
 const LOG_PATH = path.resolve('./logs/app.log');
 
@@ -30,6 +32,9 @@ const routes: FastifyPluginAsync = async (app: FastifyInstance) => {
       return errorResponse(reply, 500, 'Failed to retrieve logs', err as Error);
     }
   });
+
+  app.register(rootRoutes);
+  app.register(authRoutes, { prefix: '/v1/auth' });
 };
 
 export default routes;

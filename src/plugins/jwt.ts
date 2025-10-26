@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   role: string;

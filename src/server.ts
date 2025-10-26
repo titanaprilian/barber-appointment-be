@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import fastify, { FastifyInstance } from 'fastify';
 import type { Server } from 'node:http';
 import closeWithGrace from 'close-with-grace';
@@ -94,7 +95,19 @@ const createServer = async (): Promise<FastifyInstance<Server>> => {
     .register(import('@fastify/cors'), config.cors)
     .register(import('@fastify/cookie'))
     .register(import('@fastify/formbody'))
+    .register(import('@fastify/under-pressure'), config.healthcheck)
     .register(jwt, { global: true });
+
+  // Database and API documentation setup based on environment
+  if (config.isDevEnvironment) {
+    app.log.info('db: development');
+    await app
+      .register(import('@fastify/swagger'), config.swagger)
+      .register(import('@fastify/swagger-ui'), config.swaggerUI);
+  } else {
+    app.log.info('db: production');
+    logger.info('Production environment detected, skipping Swagger registration');
+  }
 
   /**
    * ==========================
