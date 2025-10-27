@@ -5,6 +5,7 @@ import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 import rootRoutes from '@app/base/routes.js';
 import authRoutes from '@app/auth/routes.js';
 import userRoutes from '@app/user/routes.js';
+import serviceRoutes from '@app/service/routes.js';
 
 const LOG_PATH = path.resolve('./logs/app.log');
 
@@ -37,6 +38,7 @@ const routes: FastifyPluginAsync = async (app: FastifyInstance) => {
   app.register(rootRoutes);
   app.register(authRoutes, { prefix: '/v1/auth' });
   app.register(userRoutes, { prefix: '/v1/users' });
+  app.register(serviceRoutes, { prefix: '/v1/services' });
 };
 
 export default routes;
