@@ -51,8 +51,6 @@ class UserRepository {
       phone: updates.phone,
     };
 
-    console.log('user id: ', id);
-
     const updatedUser = await this.db
       .updateTable('User')
       .set(updateRecord)

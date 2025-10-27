@@ -63,9 +63,9 @@ class UserHandler {
           stack: (error as Error).stack,
         },
       });
-    }
 
-    return errorResponse(reply, 500, 'Internal Server Error');
+      return errorResponse(reply, 500, 'Internal Server Error');
+    }
   };
 
   /**
