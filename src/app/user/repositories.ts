@@ -45,9 +45,17 @@ class UserRepository {
    * Updates user profile information (name, email, phone) by ID.
    */
   async update(id: number, updates: UpdatableUser): Promise<Omit<User, 'password'> | undefined> {
+    const updateRecord = {
+      name: updates.name,
+      email: updates.email,
+      phone: updates.phone,
+    };
+
+    console.log('user id: ', id);
+
     const updatedUser = await this.db
       .updateTable('User')
-      .set(updates)
+      .set(updateRecord)
       .where('id', '=', id)
       .returning(['id', 'name', 'email', 'role', 'phone'])
       .executeTakeFirst();
