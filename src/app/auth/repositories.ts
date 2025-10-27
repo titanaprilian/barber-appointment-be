@@ -3,7 +3,7 @@ import { User, UserRegister } from './types.js';
 import { randomBytes } from 'crypto';
 import addDays from 'add-days';
 
-interface UserTable {
+export interface UserTable {
   id: ColumnType<number, never, never>;
   name: string;
   email: string;

@@ -31,7 +31,6 @@ class AuthService {
     }
 
     if (existingNameUser) {
-      // NOTE: If names don't need to be unique, omit this block.
       throw new UserExistsError('User with this username already exists.');
     }
 

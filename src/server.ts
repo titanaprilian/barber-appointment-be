@@ -9,6 +9,7 @@ import { logger } from '@utils/logger.js';
 import routes from 'routes.js';
 import { loggerConfig } from '@config/logger.js';
 import { randomUUID } from 'node:crypto';
+import authorizationPlugin from '@plugins/authorizationPlugin.js';
 
 /**
  * Creates and configures a Fastify server instance.
@@ -96,7 +97,8 @@ const createServer = async (): Promise<FastifyInstance<Server>> => {
     .register(import('@fastify/cookie'))
     .register(import('@fastify/formbody'))
     .register(import('@fastify/under-pressure'), config.healthcheck)
-    .register(jwt, { global: true });
+    .register(jwt, { global: true })
+    .register(authorizationPlugin, { global: true });
 
   // Database and API documentation setup based on environment
   if (config.isDevEnvironment) {

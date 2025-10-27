@@ -42,7 +42,7 @@ class AuthHandler {
       // Handle specific business errors
       if (error instanceof UserExistsError) {
         logger.warn({
-          msg: 'User registration failed - user already exists',
+          msg: 'User registration failed - user with credentials already exists',
           error: {
             message: error.message,
           },
@@ -114,6 +114,9 @@ class AuthHandler {
 
       return successResponse(reply, 200, 'Logout successfull');
     } catch (error) {
+      // 🗑️ Clear both cookies
+      this.clearAuthTokens(reply);
+
       // Handle specific business errors
       if (error instanceof InvalidTokenError) {
         logger.warn({

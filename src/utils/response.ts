@@ -16,14 +16,6 @@ export function successResponse(
   });
 }
 
-/**
- * Send response to the client
- *
- * @param reply - Fastify reply object
- * @param statusCode - HTTP status code
- * @param message - Response message
- * @param data - Additional data to send
- */
 export function errorResponse(reply: FastifyReply, statusCode: number, message: string, data: unknown = null) {
   return reply.code(statusCode).send({
     error: true,

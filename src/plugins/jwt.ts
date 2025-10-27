@@ -1,4 +1,6 @@
 import fastifyJwt from '@fastify/jwt';
+import { getAccessToken } from '@utils/cookie.js';
+import { errorResponse } from '@utils/response.js';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import fp from 'fastify-plugin';
 
@@ -44,8 +46,25 @@ async function fastJWT(app: FastifyInstance) {
         phone: user.phone,
         role: user.role,
       },
-      { expiresIn: '1d' }
+      { expiresIn: '60m' }
     );
+
+  /**
+   * * check if logged in
+   */
+  const authenticated = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const token = getAccessToken(req);
+      if (!token) {
+        return errorResponse(reply, 401, 'Token is missing');
+      }
+
+      req.headers.authorization = `Bearer ${token}`;
+      await req.jwtVerify();
+    } catch (error) {
+      return errorResponse(reply, 401, 'Unauthorized: Invalid or expired token');
+    }
+  };
 
   app.decorate('authenticate', authenticated);
 
@@ -69,13 +88,6 @@ declare module 'fastify' {
     };
   }
 }
-
-/**
- * * check if logged in
- */
-const authenticated = async (req: FastifyRequest, reply: FastifyReply) => {
-  await req.jwtVerify();
-};
 
 export default fp(fastJWT, {
   fastify: '>=5.0.0',
