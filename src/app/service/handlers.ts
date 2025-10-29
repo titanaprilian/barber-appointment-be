@@ -73,7 +73,7 @@ class ServiceHandler {
     } catch (error) {
       // Handle unexpected errors
       logger.error({
-        msg: 'Error update user information',
+        msg: 'Error create new service',
         error: {
           message: (error as Error).message,
           stack: (error as Error).stack,

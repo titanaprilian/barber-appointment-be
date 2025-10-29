@@ -1,8 +1,6 @@
-// src/app/service/service.service.ts
-
 import { ServiceNotExistsError } from './errors.js';
 import ServiceRepository from './repositories.js';
-import { ServiceBody, ServiceResponse, UpdateServiceBody } from './types.js'; // Assuming you define these TypeBox-derived types
+import { ServiceBody, ServiceResponse, UpdateServiceBody } from './types.js';
 
 class ServiceService {
   private repository: ServiceRepository;
@@ -12,7 +10,7 @@ class ServiceService {
   }
 
   /**
-   * Creates a new service after checking for existing duplicates.
+   * Creates a new service
    */
   public async create(serviceData: ServiceBody): Promise<ServiceResponse> {
     return this.repository.create(serviceData);

@@ -58,6 +58,7 @@ const errorResponses = {
   400: replyErrorObj,
   401: replyErrorObj,
   404: replyErrorObj,
+  409: replyErrorObj,
   500: replyErrorObj,
 };
 
